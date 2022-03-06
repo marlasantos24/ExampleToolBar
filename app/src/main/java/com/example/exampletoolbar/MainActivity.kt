@@ -7,7 +7,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import android.util.Log
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +34,33 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+
+        val itemBusqueda = menu?.findItem(R.id.busqueda)
+        var vistaBusqueda = itemBusqueda?.actionView as SearchView
+
+        vistaBusqueda.queryHint = "Escribe tu nombre..."
+
+        vistaBusqueda.setOnQueryTextFocusChangeListener { view, b ->
+            Log.d("LISTENERFOCUS", hasWindowFocus().toString())
+        }
+
+        vistaBusqueda.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    Log.d("onQueryTextChange", newText)
+
+                }
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    Log.d("onQueryTextSubmit", query)
+                }
+                return true
+            }
+        })
 
         return super.onCreateOptionsMenu(menu)
     }
