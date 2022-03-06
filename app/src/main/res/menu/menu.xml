@@ -13,4 +13,9 @@
         android:icon="@drawable/fav"
         android:title="Item"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/share"
+        android:title="Compartir"
+        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
+        app:showAsAction="always"></item>
 </menu>
